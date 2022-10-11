@@ -1,0 +1,9 @@
+.ignore/**
+.idea/**
+bin/**
+lib/**
+*.code-workspace
+.vscode/**
+.gradle/**
+eclipse/**
+
