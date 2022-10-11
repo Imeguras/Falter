@@ -2,6 +2,7 @@
 .idea/**
 bin/**
 lib/**
+run/**
 *.code-workspace
 .vscode/**
 .gradle/**
