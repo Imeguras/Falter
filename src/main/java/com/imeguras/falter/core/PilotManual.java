@@ -7,7 +7,7 @@ public final class PilotManual {
 	public static final String BUILD = "GRADLE:BUILD";
 	public static final String VERSION = "GRADLE:VERSION-" + BUILD;
 	
-	public static final String PROXY_COMMON = "imeguras.falter.proxy.CommonProxy";
-	public static final String PROXY_CLIENT = "imeguras.falter.proxy.ClientProxy";
+	public static final String PROXY_COMMON = "com.imeguras.falter.proxy.CommonProxy";
+	public static final String PROXY_CLIENT = "com.imeguras.falter.proxy.ClientProxy";
 	
 }

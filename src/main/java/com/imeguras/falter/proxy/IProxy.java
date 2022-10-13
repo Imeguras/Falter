@@ -4,17 +4,20 @@ import java.io.File;
 
 import javax.annotation.Nullable;
 
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 //import net.minecraftforge.fml.relauncher.Side;
 
 public interface IProxy 
 {
-	public void preInit();
+	public void preInit(FMLPreInitializationEvent event);
 	
-	public void init();
+	public void init(FMLInitializationEvent event);
 	
-	public void postInit();
+	public void postInit(FMLPostInitializationEvent event);
 	
 	
 	

@@ -24,15 +24,19 @@ public class Falter{
 
 	public static Logger logger = LogManager.getLogger("Falter");
     
-	@SidedProxy(clientSide = "ClientProxy", serverSide = "ServerProxy")
+	@SidedProxy(clientSide=PilotManual.PROXY_CLIENT, serverSide=PilotManual.PROXY_COMMON)
 	public static IProxy proxy;
-	
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event){
+		proxy.preInit(event);
+	}
 	@EventHandler
     public void init(FMLInitializationEvent event){
-		
-		// some example code
-        //System.out.println("DIRT BLOCK >> "+Blocks.dirt.getUnlocalizedName());
-		
+		proxy.init(event);
+	}
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event){
+		proxy.postInit(event);
 	}
 	
 
