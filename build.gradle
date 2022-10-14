@@ -69,7 +69,7 @@ processResources{
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
 
-        expand 'version': project.version, 'mcversion': project.minecraft.version, 'modid': "${config.mod_id}", 'modname': "${config.mod_name}", 'description': "${config.description}", 'url': "${config.mod_url}", 'authorList': "[\"${config.mod_author}\"]", 'credits': "${config.mod_credits}", 'logoFile': "${config.mod_logo}"
+        expand 'version': project.version, 'mcversion': project.minecraft.version, 'modid': "${config.mod_id}", 'modname': "${config.mod_name}", 'description': "${config.mod_description}", 'url': "\"${config.mod_url}\"", 'authorList': "[ \"${config.mod_author}\" ]", 'credits': "${config.mod_credits}", 'logoFile': "${config.mod_logo}"
     }
 
     // copy everything else, thats not the mcmod.info

@@ -1,16 +1,16 @@
 [
 {
-  "modid": "${modid}",
-  "name": "${modname}",
-  "description": "${description}",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "${url}",
+  "modid": ${modid},
+  "name": ${modname},
+  "description": ${description},
+  "version": ${version},
+  "mcversion": ${mcversion},
+  "url": ${url},
   "updateUrl": "",
-  "authorList": "${authorList}",
-  "credits": "${credits}",
-  "logoFile": "${logoFile}",
-  "screenshots": "",
-  "dependencies": ""
+  "authorList": ${authorList},
+  "credits": ${credits},
+  "logoFile": ${logoFile},
+  "screenshots": [],
+  "dependencies": []
 }
 ]
