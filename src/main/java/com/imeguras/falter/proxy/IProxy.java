@@ -1,7 +1,5 @@
 package com.imeguras.falter.proxy;
 
-import java.io.File;
-
 import javax.annotation.Nullable;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;

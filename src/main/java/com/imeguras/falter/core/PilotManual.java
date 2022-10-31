@@ -9,5 +9,6 @@ public final class PilotManual {
 	
 	public static final String PROXY_COMMON = "com.imeguras.falter.proxy.CommonProxy";
 	public static final String PROXY_CLIENT = "com.imeguras.falter.proxy.ClientProxy";
-	
+	/*Asset Texture Locations*/
+	public static final String ThirstBarIcons = "falter:textures/gui/thirst.png";
 }

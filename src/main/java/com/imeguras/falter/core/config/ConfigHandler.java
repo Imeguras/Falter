@@ -1,12 +1,11 @@
 package com.imeguras.falter.core.config;
 
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 
 import java.io.File;
 
 import com.imeguras.falter.core.PilotManual;
-import com.imeguras.falter.core.config.ConfigManual;
+
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
