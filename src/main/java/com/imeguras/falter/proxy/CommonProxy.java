@@ -105,6 +105,7 @@ public class CommonProxy implements IProxy{
 			}
 			stats=playerStats.get(player.getUniqueID()).clone();
 		}catch(Exception e){
+			
 			stats=new ThirstHandler();
 			e.printStackTrace();
 		}
@@ -135,6 +136,7 @@ public class CommonProxy implements IProxy{
 	public void playerTick(PlayerTickEvent event) {
 	
 		if(event.side==Side.SERVER){
+			//System.out.println("GEX! HAAAAAAAAAAAAAAAAAA"+event.player.getUniqueID());
 			playerServerTick(event.player);
 		}else{
 			playerClientTick();
@@ -144,7 +146,9 @@ public class CommonProxy implements IProxy{
 	protected void playerClientTick() {
 		//NO-OP
 	}
-	private void playerServerTick(EntityPlayer event) {
-		playerStats.get(event.getUniqueID()).onTick();
+	private void playerServerTick(EntityPlayer player) {
+		ThirstHandler t=getPlayerThirst(player);
+		t.onTick();
 	}
+	
 }

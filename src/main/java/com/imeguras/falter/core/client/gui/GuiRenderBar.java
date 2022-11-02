@@ -4,6 +4,7 @@ import java.util.Random;
 import com.imeguras.falter.core.PilotManual;
 import com.imeguras.falter.core.config.ConfigManual;
 import com.imeguras.falter.core.player.PlayerStats;
+import com.imeguras.falter.proxy.ClientProxy;
 import com.imeguras.falter.proxy.CommonProxy;
 
 import net.minecraft.client.Minecraft;
@@ -20,14 +21,14 @@ public class GuiRenderBar {
 	public static int left_height = 39;
     public static int right_height = 39;
 
-    public static void renderThirst(ConfigManual config, int horizontalMargin, int verticalMargin) {
+    public static void renderThirst( ConfigManual config, int horizontalMargin, int verticalMargin) {
 		if(!config.FLAG_THIRST){
 			System.out.println("Thirst is disabled, no UI drawn");
 			return;
 		}
 		bind(new ResourceLocation(PilotManual.ThirstBarIcons));
 
-		PlayerStats stats = CommonProxy.getPlayerStats(mc.thePlayer);
+		PlayerStats stats = ClientProxy.ps;
 
 		GuiIngame ingameGUI = mc.ingameGUI;
 		updateCounter = ingameGUI.getUpdateCounter();

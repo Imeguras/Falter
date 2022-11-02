@@ -3,9 +3,12 @@ package com.imeguras.falter.core.player;
 import com.imeguras.falter.Falter;
 import com.imeguras.falter.core.PilotManual;
 import com.imeguras.falter.core.config.ConfigManual;
+import com.imeguras.falter.core.network.NetworkHandler;
+import com.imeguras.falter.core.network.PlayerPacket;
 import com.imeguras.falter.libs.Constants;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.EnumDifficulty;
@@ -70,6 +73,8 @@ public class ThirstHandler implements Cloneable{
 			
 			stats.thirstLevel=0;
 		}
+		EntityPlayerMP t = (EntityPlayerMP) player;
+		NetworkHandler.networkWrapper.sendTo(new PlayerPacket(stats), t);
 		this.writeData();
 	}
 	public void readNBTData() {

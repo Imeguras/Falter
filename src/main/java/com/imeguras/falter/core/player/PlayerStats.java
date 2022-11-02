@@ -2,6 +2,9 @@ package com.imeguras.falter.core.player;
 
 
 import com.imeguras.falter.libs.Annotations.Defaulted;
+
+import io.netty.buffer.ByteBuf;
+
 import com.imeguras.falter.libs.Annotations.Clamped;
 
 public class PlayerStats implements Cloneable{
@@ -40,6 +43,17 @@ public class PlayerStats implements Cloneable{
 		clone.bodyTemperature=this.bodyTemperature;
 		return clone;
 	}
-	
+	public void unserialize(ByteBuf buf){
+		thirstLevel=buf.readInt();
+		thirstSaturation=buf.readDouble();
+		temperature=buf.readDouble();
+		bodyTemperature=buf.readDouble();
+	}
+	public void serialize(ByteBuf buf){
+		buf.writeInt(thirstLevel);
+		buf.writeDouble(thirstSaturation);
+		buf.writeDouble(temperature);
+		buf.writeDouble(bodyTemperature);
+	}
 	
 }
