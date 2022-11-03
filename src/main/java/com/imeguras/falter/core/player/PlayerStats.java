@@ -55,5 +55,11 @@ public class PlayerStats implements Cloneable{
 		buf.writeDouble(temperature);
 		buf.writeDouble(bodyTemperature);
 	}
+	//toString() override
+	@Override
+	public String toString() {
+		return "PlayerStats "+this.hashCode()+" [thirstLevel=" + thirstLevel + ", thirstSaturation=" + thirstSaturation + ", temperature="
+				+ temperature + ", bodyTemperature=" + bodyTemperature + "]";
+	}
 	
 }

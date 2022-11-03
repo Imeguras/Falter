@@ -28,14 +28,13 @@ public class PlayerPacket implements IMessage{
 		
 	}
 	public void handleClientSide() {
-		ClientProxy.ps=ps;
-		
+		ClientProxy.ps=this.ps;	
+		System.out.println("Client side"+ps.toString());	
 	}
 	
 	public static class Handler implements IMessageHandler<PlayerPacket, IMessage> {
         @Override
         public IMessage onMessage(PlayerPacket message, MessageContext ctx) {
-			
 			message.handleClientSide();
             return null;
         }

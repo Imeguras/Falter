@@ -20,7 +20,10 @@ public class ClientProxy extends CommonProxy {
 	public static PlayerStats ps; 
 	@Override
 	public void preInit(FMLPreInitializationEvent event){
-		super.preInit(event);	
+		super.preInit(event);
+		if(ps==null){
+			ps=new PlayerStats();
+		}
 	}
 	@Override
 	public void init(FMLInitializationEvent event){

@@ -2,6 +2,7 @@ package com.imeguras.falter.core;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
@@ -19,6 +20,8 @@ import java.util.HashMap;
 import com.imeguras.falter.Falter;
 import com.imeguras.falter.core.client.gui.GuiRenderBar;
 import com.imeguras.falter.core.config.ConfigManual;
+import com.imeguras.falter.core.network.NetworkHandler;
+import com.imeguras.falter.core.network.PlayerPacket;
 import com.imeguras.falter.core.player.PlayerStats;
 import com.imeguras.falter.core.player.ThirstHandler;
 import com.imeguras.falter.proxy.ClientProxy;
@@ -42,13 +45,20 @@ public class EventSystem implements IGuiHandler{
 
 	@SubscribeEvent
 	public void onPlayerRightClick(PlayerInteractEvent event){
+		
 		//TODO: Isn't there a more specific event for this? Also i sorted by "probability" so this wouldnt be such a "performance hog"
 		if(event.world.getBlock(event.x, event.y, event.z) == net.minecraft.init.Blocks.water &&
 		event.entityPlayer.getHeldItem() == null &&
 		event.entityPlayer.isSneaking() &&
 		event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK
 		){
+			ThirstHandler t=CommonProxy.getPlayerThirst(event.entityPlayer);
+			t.stats.thirstLevel+=5; 
+			//TODO: REMOVE THIS
+			if(t.stats.thirstLevel>20)
+				t.stats.thirstLevel=20;
 			
+			NetworkHandler.networkWrapper.sendTo(new PlayerPacket(t.stats), (EntityPlayerMP) event.entityPlayer);
 			event.setCanceled(true);
 			
 		}
@@ -79,9 +89,10 @@ public class EventSystem implements IGuiHandler{
 	@SubscribeEvent
 	public void onPlayerLoggedIn(PlayerLoggedInEvent event) {
 		ThirstHandler temp= new ThirstHandler(event.player);
+		temp.readNBTData();
 		CommonProxy.putPlayerStats(event.player, temp);
-
-	}
+		NetworkHandler.networkWrapper.sendTo(new PlayerPacket(temp.stats), (EntityPlayerMP)event.player);
+	}	
 	@SubscribeEvent
 	public void onLogout(PlayerLoggedOutEvent event) {
 		CommonProxy.getPlayerThirst(event.player).writeData();
@@ -89,11 +100,5 @@ public class EventSystem implements IGuiHandler{
 		CommonProxy.removePlayerStats(event.player);
 	}
 	
-	@SideOnly(Side.CLIENT)
-	public PlayerStats getPlayerStats(EntityPlayer player) {
-
-		return CommonProxy.getPlayerStats(player);
-	}
-
 
 }

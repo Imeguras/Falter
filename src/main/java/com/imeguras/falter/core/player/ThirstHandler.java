@@ -28,7 +28,7 @@ public class ThirstHandler implements Cloneable{
 	public ThirstHandler(EntityPlayer player){
 		this();
 		this.player = player;	
-		readNBTData();
+		
 	}
 	public void onTick() {
 		EnumDifficulty difficultyID =player.worldObj.difficultySetting;
@@ -48,9 +48,8 @@ public class ThirstHandler implements Cloneable{
 				accumulator++; 
 				break;
 		}
-		if(timer >= 400) {
+		if(timer >= Constants.thirstTimerTarget) {
 			dryPlayer();
-			//player.attackEntityFrom(thirstSource, 1);
 			timer = 0;
 		}
 		accumulator*=(configMan.BASE_GENERAL_THIRST_LOSS_RATE);
@@ -63,16 +62,12 @@ public class ThirstHandler implements Cloneable{
 			stats.thirstSaturation=0;
 		}
 		if(stats.thirstLevel<=0){
-			
-			if(player.getHealth()>1){
+			if(player.getHealth()>1 || configMan.FLAG_DEATH_FROM_THIRST){
 				player.attackEntityFrom(thirstSource, 1);
-			}else if(configMan.FLAG_DEATH_FROM_THIRST){
-				player.attackEntityFrom(thirstSource, 1);
-				
 			}
-			
 			stats.thirstLevel=0;
 		}
+		System.out.println("SERVER Thirst: "+stats.toString());
 		EntityPlayerMP t = (EntityPlayerMP) player;
 		NetworkHandler.networkWrapper.sendTo(new PlayerPacket(stats), t);
 		this.writeData();

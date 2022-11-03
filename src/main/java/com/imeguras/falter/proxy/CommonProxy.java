@@ -15,6 +15,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.WorldTickEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -103,7 +104,8 @@ public class CommonProxy implements IProxy{
 			if(!playerStats.containsKey(player.getUniqueID())){
 				throw new Exception("Such Entity isn't present in the server");
 			}
-			stats=playerStats.get(player.getUniqueID()).clone();
+			//.clone()
+			stats=playerStats.get(player.getUniqueID());
 		}catch(Exception e){
 			
 			stats=new ThirstHandler();
@@ -133,6 +135,7 @@ public class CommonProxy implements IProxy{
 		}
 	}
 	@SubscribeEvent
+
 	public void playerTick(PlayerTickEvent event) {
 	
 		if(event.side==Side.SERVER){
@@ -144,7 +147,7 @@ public class CommonProxy implements IProxy{
 	
 	}	
 	protected void playerClientTick() {
-		//NO-OP
+		
 	}
 	private void playerServerTick(EntityPlayer player) {
 		ThirstHandler t=getPlayerThirst(player);
